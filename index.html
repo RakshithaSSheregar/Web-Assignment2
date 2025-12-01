@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Online Application Form</title>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(to right, #4b79a1, #283e51);
+            color: #fff;
+        }
+
+        .container {
+            width: 45%;
+            margin: 60px auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(25px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            font-size: 14px;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            outline: none;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            margin-top: 10px;
+            background: #1abc9c;
+            color: #fff;
+            border: none;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #16a085;
+            transform: scale(1.05);
+        }
+
+        /* Output Box */
+        #output {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 15px;
+            animation: fadeIn 0.8s ease;
+        }
+
+        #output p {
+            background: rgba(255,255,255,0.15);
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Online Application Form</h2>
+
+    <form id="regForm">
+        <div class="input-group">
+            <label>Full Name</label>
+            <input type="text" id="name" required>
+        </div>
+
+        <div class="input-group">
+            <label>Email</label>
+            <input type="email" id="email" required>
+        </div>
+
+        <div class="input-group">
+            <label>Phone</label>
+            <input type="text" id="phone" required>
+        </div>
+
+        <div class="input-group">
+            <label>Gender</label>
+            <select id="gender" required>
+                <option value="">Select</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>Date of Birth</label>
+            <input type="date" id="dob" required>
+        </div>
+
+        <div class="input-group">
+            <label>Course</label>
+            <select id="course" required>
+                <option>BCA</option>
+                <option>BTech</option>
+                <option>MCA</option>
+                <option>BSc Computer Science</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn">Submit</button>
+    </form>
+
+    <!-- OUTPUT BOX -->
+    <div id="output"></div>
+</div>
+
+<script>
+    $("#regForm").submit(function (e) {
+        e.preventDefault();  // Stop page refresh
+
+        // Validation for phone
+        let phone = $("#phone").val();
+        if (!/^[0-9]{10}$/.test(phone)) {
+            alert("Phone must be exactly 10 digits");
+            return;
+        }
+
+        // Display output
+        $("#output").html(`
+            <h3>Submitted Information</h3>
+            <p><strong>Name:</strong> ${$("#name").val()}</p>
+            <p><strong>Email:</strong> ${$("#email").val()}</p>
+            <p><strong>Phone:</strong> ${$("#phone").val()}</p>
+            <p><strong>Gender:</strong> ${$("#gender").val()}</p>
+            <p><strong>DOB:</strong> ${$("#dob").val()}</p>
+            <p><strong>Course:</strong> ${$("#course").val()}</p>
+        `);
+
+        $("#output").fadeIn(500); // Smooth animation
+    });
+</script>
+
+</body>
+</html>
